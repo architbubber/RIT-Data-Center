@@ -1,0 +1,108 @@
+<% include ../partials/header %>
+<% include ../partials/faculty-sidebar %>
+<% include ../partials/faculty-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Edit Profile</h4>
+                    <p class="category">Complete your profile</p>
+                </div>
+                <div class="card-content">
+                    <table class="table">
+                        <tbody>
+                        <br>
+                            <% loadInTableVerticle(data["faculty"],1) %>
+                        </tbody>
+                    </table>
+                </div>
+                <a href = "/faculty/generateexcel/1/1/?faculty=<%-GetParam%>">
+                <button class="btn btn-primary pull-left hodDisable" style="margin:13px">Generate Excel file</button>
+                </a>
+                <button class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModular('faculty', 0)">Update</button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-profile">
+                <div class="card-avatar">
+                    <a href="#pablo">
+                        <img class="img" style="position:relative;" id="profileImage" src="../assets/img/faces/<%-fId%>.jpg" onmouseover="displayInput()" onmouseout="hideInput()"/>
+                    </a>
+                </div>
+                <form action="/faculty/changeProfilePicture" method="post" id="profileForm"  enctype="multipart/form-data">
+                    <input name="avatar" onchange="checkIfInput()" type="file" class="pull-right hodDisable" id="profileImageButton" style="display:none; margin-top:-40px; position:absolute;" onmouseover="displayInput()" onmouseout="hideInput()"/>
+                </form>
+                <div class="content">
+                    <h6 class="category text-gray"><%-data["faculty"][0]["designation"]%></h6>
+                    <h4 class="card-title"><%-data["faculty"][0]["Name"]%></h4>
+                    <p class="card-content">
+                    <%-about%>
+                    </p>
+                    <button  data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick = "fillDescriptionModular('faculty', 0)" class="btn btn-primary btn-round  insertButton">Edit Description</button>
+                </div>
+            </div>
+        </div>
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Professional Activities</h4>
+                        <p class="category">information about professional activities.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Board</th>
+                                <th>College</th>
+                                <th>External / Internal</th>
+                                <th>Year</th>
+                            </thead>
+                            <tbody>
+                                <%loadInTableModular("professional_activities", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/department/generateexcel/1/6/?departmentId=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+                <button class="btn btn-primary pull-right insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('professional_activities')">Insert</button>                </div>
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Professional Body Membership.</h4>
+                        <p class="category">information about professional bodies.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Name of Professional Body</th>
+                                <th>Type of Membership</th>
+                                <th>Year of Subscription</th>
+                            </thead>
+                            <tbody>
+                                <%loadInTableModular("professional_body_membership", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/department/generateexcel/2/6/?departmentId=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+                <button class="btn btn-primary pull-right insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('professional_body_membership')">Insert</button>                
+                </div>        
+    </div>
+</div>
+
+
+
+
+
+
+<!--model containing form for faculty qualification below -->
+<!-- TODO == MAKE MODEL MODULAR -->
+
+
+
+
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

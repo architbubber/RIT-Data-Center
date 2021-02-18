@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+<% include ../partials/department-sidebar %>
+<% include ../partials/department-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+              <h2>Professional Body/BOE/BOS/Editors/Session Chairs</h2>
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">BOS Membership</h4>
+                        <p class="category">information about seminars and workshops conducted in the college.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Name of the Member</th>
+                                <th>Designation</th>
+                                <th>Organization</th>
+                                <th>Course</th>
+                                <th>Year</th>
+                            </thead>
+                            <tbody>
+                                <%loadInTableModular("bos_membership", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/department/generateexcel/3/6/?departmentId=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+                <button class="btn btn-primary pull-right insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('bos_membership')">Insert</button>
+              </div>
+
+              <div class="card">
+                  <div class="card-header" data-background-color="purple">
+                      <h4 class="title">BOE Membership</h4>
+                      <p class="category">information about seminars and workshops conducted in the college.</p>
+                  </div>
+                  <div class="card-content table-responsive">
+                      <table class="table">
+                          <thead class="text-primary">
+                              <th>Name of the Member</th>
+                              <th>Designation</th>
+                              <th>Organization</th>
+                              <th>Course</th>
+                              <th>Year</th>
+                          </thead>
+                          <tbody>
+                              <%loadInTableModular("boe_membership", updatePermission)%>
+                          </tbody>
+                      </table>
+                  </div>
+                  <a href = "/department/generateexcel/4/6/?departmentId=<%-GetParam%>">
+                  <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                  </a>
+              <button class="btn btn-primary pull-right insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('boe_membership')">Insert</button>
+            </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

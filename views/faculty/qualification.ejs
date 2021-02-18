@@ -1,0 +1,43 @@
+
+<% include ../partials/header %>
+<% include ../partials/faculty-sidebar %>
+<% include ../partials/faculty-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Qualification Details</h4>
+                        <p class="category">information about degree, year, university etc.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Degree</th>
+                                <th>University</th>
+                                <th>College Name</th>
+                                <th>Pass Class</th>
+                                <th>Year of Degree Awarded</th>
+                                <th>Area of Specialization</th>
+                            </thead>
+                            <tbody>
+                                <% loadInTableModular('faculty_qualification', updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                <a href = "/faculty/generateexcel/1/2/?faculty=<%-GetParam%>">
+                <button class="btn btn-primary pull-left hodDisable" style="margin:13px">Generate Excel file</button>
+                </a>
+                <button class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick = "fillDataModularInsert('faculty_qualification')" >Insert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

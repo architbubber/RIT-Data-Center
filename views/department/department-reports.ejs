@@ -1,0 +1,107 @@
+<% include ../partials/header %>
+<% include ../partials/department-sidebar %>
+<% include ../partials/department-navbar %>
+<% include ../partials/loadSelectList %>
+
+<h2>QUERY PAGE</h2>
+<form class="form-inline">
+  <div class="form-group" id = "filters">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>
+          <label for="department">Department</label>
+          <select class="form-control" id="department">
+            <%loadInList(selectList0)%>
+          </select>
+        </th>
+        <th>
+          <label for="tableList">Tables</label>
+          <select class="form-control" id="tableList">
+            <%loadInList(selectList1)%>
+          </select>
+        </th>
+        <th>
+          <label for="facultyList">Name</label>
+          <select class="form-control" id="facultyList">
+            <option>ALL</option>
+            <%loadInList(selectList2)%>
+          </select>
+        </th>
+
+        <th>
+          <label for="type">Type</label>
+          <select class="form-control" id="type">
+            <%loadInList([{type:"ALL"}, {type:"international"}, {type:"national"}])%>
+          </select>
+        </th>
+
+        <th>
+          <label for="yearList">Year</label>
+          <select class="form-control" id="yearList">
+            <%loadInList([{year:"ALL"}, {year:1}, {year:2}, {year:3}, {year:4}, {year:5}])%>
+          </select>
+        </th>
+        <th>
+
+          <label for="from">From:</label>
+            <input type="date" id="from">
+        </th>
+        <th>
+
+          <label for="to">To:</label>
+            <input type="date" id="to">
+        </th>
+
+    </table>
+
+  </div>
+
+</form>
+
+<div class="panel-body" runat="server" style="overflow-x: scroll; background:#f7f9f9;">
+    <div class="mid-width wrapItems">
+      <form class = "form-inline">
+    <div class = "form-group" id = "columnFilter">
+    </div>
+  </form>
+</div>
+</div>
+
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title" id = "title"></h4>
+                        <p class="category" id = "titleDesc"></p>
+                    </div>
+                    <div class="panel-body" runat="server" style="overflow-x: scroll;height:500px;overflow-y: auto;" id ="card">
+                        <div class="mid-width wrapItems">
+                    <div class="card-content table-responsive" >
+                        <table class="table" id="tableR">
+
+
+                        </table>
+                    </div>
+                  </div>
+              </div>
+                    <button class="btn btn-primary pull-left"  id = "getReportDepartment" style="margin:13px">Generate Excel File</button>
+                    <button class="btn btn-primary pull-left"  id = "getSummaryDepartment" style="margin:13px">Generate Summary</button>
+
+                </div>
+            </div >
+        </div>
+    </div>
+</div>
+
+<% include ../partials/disableDropDown %>
+<% include ../partials/footer %>
+<script src="/js/dataSets.js"></script>
+<script src="/js/conversionDictionary.js"></script>
+<script src="/js/queryFunctions.js"></script>
+<script>
+  document.getElementById("card").style.height = screen.height+"px";
+</script>

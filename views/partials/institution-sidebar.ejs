@@ -1,0 +1,61 @@
+<div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg" style="z-index:4">
+
+<div class="logo" style=" background-color:#9C27B0">
+    <img src="/assets/img/brand.png" style="height:70px;" class="img-responsive">
+    </img>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li
+        <% if(type=="dashboard"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/institution">
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="governance"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/institution/governance" onclick="activate(event)">
+                <i class="material-icons">person</i>
+                <p>Governance</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="finance"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/institution/finance">
+                <i class="material-icons">content_paste</i>
+                <p>Finance</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="academic"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/institution/academic">
+                <i class="material-icons">library_books</i>
+                <p>Academic</p>
+            </a>
+        </li>
+        <li class="active-pro" style="margin-bottom:7%; text-transform: uppercase;">
+            <a style="background-color:#9C27B0; color:white;">
+            <i class="material-icons" style="color:white">person</i>
+                <% if(authType!="hod" && authType!="coordinator" && authType!="principal" && authType!="admin"){%>
+                Faculty
+                <%}else{%>
+                <%=authType%>
+                <%}%>
+            </a>
+        </li>
+  
+    </ul>
+</div>

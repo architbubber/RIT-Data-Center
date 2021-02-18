@@ -1,0 +1,116 @@
+<div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg" style="z-index:4">
+
+<div class="logo" style=" background-color:#9C27B0">
+    <img src="/assets/img/brand.png" style="height:70px;" class="img-responsive">
+    </img>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li
+        <% if(type=="dashboard"){%>
+        class="active"
+        <% } %>
+        >
+            <a 
+            <% if(!GetParam){%>
+             href="/faculty"
+             <%} else {%>
+             href="/faculty?fId=<%=GetParam%>"
+             <%}%>
+             >
+                <i class="material-icons">dashboard</i>
+                <p>Dashboard</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="qualification"){%>
+        class="active"
+        <% } %>
+        >
+            <a 
+            <% if(!GetParam){%>
+             href="/faculty/qualification"
+             <%} else {%>
+             href="/faculty/qualification?fId=<%=GetParam%>"
+             <%}%>
+             >                
+                <i class="material-icons">person</i>
+                <p>Qualification Details</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="service-details"){%>
+        class="active"
+        <% } %>
+        >
+            <a 
+            <% if(!GetParam){%>
+             href="/faculty/service-details"
+             <%} else {%>
+             href="/faculty/service-details?fId=<%=GetParam%>"
+             <%}%>
+             >        
+                <i class="material-icons">content_paste</i>
+                <p>Service Details</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="achievements"){%>
+        class="active"
+        <% } %>
+        >
+            <a 
+            <% if(!GetParam){%>
+             href="/faculty/achievements"
+             <%} else {%>
+             href="/faculty/achievements?fId=<%=GetParam%>"
+             <%}%>
+             >       
+                <i class="material-icons">library_books</i>
+                <p>Achievments</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="academic-details"){%>
+        class="active"
+        <% } %>
+        >
+            <a 
+            <% if(!GetParam){%>
+             href="/faculty/academic-details"
+             <%} else {%>
+             href="/faculty/academic-details?fId=<%=GetParam%>"
+             <%}%>
+             >     
+                <i class="material-icons">bubble_chart</i>
+                <p>Academic Details</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="rnd-details"){%>
+        class="active"
+        <% } %>
+        >
+            <a 
+            <% if(!GetParam){%>
+             href="/faculty/rnd-details"
+             <%} else {%>
+             href="/faculty/rnd-details?fId=<%=GetParam%>"
+             <%}%>
+             >     
+                <i class="material-icons">location_on</i>
+                <p>R&D</p>
+            </a>
+        </li>
+        <li class="active-pro" style="margin-bottom:7%; text-transform: uppercase;">
+            <a style="background-color:#9C27B0; color:white;">
+                <i class="material-icons" style="color:white">person</i>
+                <% if(authType!="hod" && authType!="coordinator" && authType!="principal" && authType!="admin"){%>
+                Faculty
+                <%}else{%>
+                <%=authType%>
+                <%}%>
+            </a>
+        </li>
+    </ul>
+</div>

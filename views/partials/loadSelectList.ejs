@@ -1,0 +1,33 @@
+<%
+
+    loadInList=function(resultSet)
+    {
+        for(var i = 0; i<resultSet.length; i++)
+        {
+
+            for(var j in resultSet[i])
+            {
+            //   console.log("result seti is : " + JSON.stringify(j));
+
+                __append('<option>' + resultSet[i][j] + '</option>');
+            }
+
+        }
+    }
+
+    loadCheckList = function(resultSet)
+    {
+        for(var i = 0; i<resultSet.length; i++)
+        {
+
+            for(var j in resultSet[i])
+            {
+
+                __append(  "<div class='checkbox'><label><input type='checkbox' value='"+resultSet[i][j]+"'>"+resultSet[i][j]+"</label></div>");
+            }
+
+        }
+    }
+
+
+%>

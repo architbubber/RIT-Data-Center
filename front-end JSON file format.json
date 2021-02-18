@@ -1,0 +1,239 @@
+slno removed from everytable
+
+removed department no and passwprd and facultyid
+
+{
+	title : "Faculty",
+	type : "dashboard",
+	data : { 
+       faculty:[
+           {
+            facultyName:,
+            gender:,
+            address:,
+            religion:,
+            caste: ,
+            category:,
+            dob :,   
+            natureOfAppoment:,
+            contactNumber:,
+            emailId:,
+            panNumber:,
+            accountNumber:,
+            pfNumber:
+           }
+       ]   
+    }
+}
+
+{
+	title : "Faculty Qualification",
+	type : "qualification",
+	data : { 
+       faculty_qualification:[
+           {
+            type: BE/MTech/Phd,
+            university:,
+            passPercentage:,
+            passYear:,
+           },
+           {
+            type: BE/MTech/Phd,
+            university:,
+            passPercentage:,
+            passYear:,
+           },
+           {
+            type: BE/MTech/Phd,
+            university:,
+            awardYear:,
+            areaOfSpecialization:
+           }
+       ]   
+    }
+}
+
+
+//removed faculty id
+
+{
+	title : "Faculty Service Details",
+	type : "service-details",
+	data : { 
+       faculty_service:[
+           {
+            designation  ,
+            qualification  ,
+            joiningDate  ,
+            yearsOfExperience  ,
+            promotionDate  ,
+            payScale  
+           }
+       ]   
+    }
+}
+
+//removed faculty id
+{
+	title : "Faculty Achievement Details",
+	type : "achievements",
+	data : { 
+        faculty_workshop_fdp:[
+           {
+            title  ,
+            sponsoredOrFunded  ,
+            date  ,
+            noOfParticipants  ,
+            type  
+           }
+       ],
+       faculty_conference_symposia:[
+           {
+            eventName  ,
+            place  ,
+            date  ,
+            invitedOrDeputed  ,
+            noOfPapersPresented  
+           }
+       ],
+       faculty_guest_lecture:[
+           {            
+            placeInvited  ,
+            title  ,
+            date               
+           }
+       ],
+       book:[
+           {            
+            bookTitle  ,
+            bookAuthors  ,
+            bookPublisher  ,
+            year                
+           }
+       ],
+       book_chapter:[
+           {            
+            chapterName  ,
+            bookName  ,
+            chapterAuthors  ,
+            publisher  ,
+            year                
+           }
+       ],
+       conference_paper:[
+           {
+            
+            authors  ,
+            title  ,
+            conferenceName  ,
+            conferenceType  ,
+            organizedBy  ,
+            year                
+           }
+       ],
+       journal_paper:[
+           {            
+            authors  ,
+            title  ,
+            issn  ,
+            journalName  ,
+            journalType  ,
+            volumeNumber  ,
+            pageNumbers  ,
+            year  ,
+            sjrQuartile                
+           }
+       ]
+    }
+}
+
+
+
+{
+	title : "Faculty Academic Details",
+	type : "academic-details",
+	data : { 
+        courses_handled:[
+           {            
+            yearHandled  ,
+            subjectName  ,
+            ugOrPg  ,
+            labHandled                
+           }
+       ],
+       projects_handled:[
+           {            
+            batch  ,
+            ugOrPg  ,
+            projectTitle                
+           }
+       ],
+       faculty_research:[
+           {            
+            guideName  ,
+            researchCandidateName  ,
+            usn  ,
+            centreName  ,
+            university  ,
+            registrationYear  ,
+            title  ,
+            status               
+           }
+       ],
+       phd_scholar:[
+           {            
+            scholarName  ,
+            guideName  ,
+            researchCentre  ,
+            university  ,
+            registrationYear  ,
+            usn  ,
+            title  ,
+            status                
+           }
+       ]   
+    }
+}
+
+
+
+{
+	title : "Faculty R&D Details",
+	type : "rnd-details",
+	data : { 
+        funded_projects:[
+           {            
+            investigatorName  ,
+            projectTitle  ,
+            nameOfFundingAgent  ,
+            sanctionOrderNumber  ,
+            projectDuration  ,
+            dateSanctioned  ,
+            sanctionedAmount                
+           }
+       ],
+       faculty_patent:[
+           {            
+            patentTitle  ,
+            applicationNumber  ,
+            dateOfFilingApplication  ,
+            publicationDate                
+           }
+       ],
+       consultancy:[
+           {            
+            financialYear  ,
+            clientOrganization  ,
+            consultancyProjectTitle  ,
+            amountReceived                
+           }
+       ],
+       industrial_collaboration_mou:[
+           {            
+            mouTitle  ,
+            mouSignedWithIndustryOrGovt  ,
+            mouSigningDate                
+           }
+       ]   
+    }
+}

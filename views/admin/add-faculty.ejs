@@ -1,0 +1,84 @@
+<% include ../partials/header %>
+<% include ../partials/admin-sidebar %>
+<% include ../partials/admin-navbar %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title">Add a new Faculty</h4>
+                    <p class="category">Fill in the details below</p>
+                </div>
+                <div class="card-content">
+                    <div class="container" style="max-width:80%">
+                        <form action="/v1/apis/addFaculty" method="post">
+                        <div class="row" style="margin-left:20px">
+                        <br />
+                            <div>
+                                <div class="form-group control-label">
+                                    <label>Name</label> <!--give class as class="control-label" for effect-->
+                                    <input type="text" class="form-control" name="name" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group label-floating">
+                                    <label>Gender</label><br>
+                                    <input type="radio" name="gender" value="Male"> Male
+                                    <input type="radio" name="gender" value="Female"> Female<br>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group control-label">
+                                    <label>Email-Id</label> <!--give class as class="control-label" for effect-->
+                                    <input type="text" class="form-control" name="email" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group control-label">
+                                    <label>Contact Number</label> <!--give class as class="control-label" for effect-->
+                                    <input type="text" class="form-control" name="contactNumber" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group control-label">
+                                    <label>Nature of Appointment</label> <!--give class as class="control-label" for effect-->
+                                    <select type="text" class="form-control" name="natureOfAppointment">
+                                        <option value="Regular">Regular</option>
+                                        <option value="Guest">Guest Lecturer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group control-label">
+                                    <label>Designation</label> <!--give class as class="control-label" for effect-->
+                                    <input type="text" class="form-control" name="designation" />
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group control-label">
+                                    <label>Department</label> <!--give class as class="control-label" for effect-->
+                                    <select type="text" class="form-control" name="department">
+                                        <% for(var i =0; i< branch.length; i++){%>
+                                        <option><%=branch[i]%></option>
+                                        <%}%>
+                                    </select>
+                                </div>
+                            </div>                                                     
+                        </div>
+                        <div class="clearfix"></div>
+                                      <div style="text-align:center">
+                <button class="btn btn-primary" type="submit" style="margin:13px">Submit</button>
+                </div>
+                    </form>
+                    </div>
+                </div>
+  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>

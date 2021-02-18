@@ -1,0 +1,475 @@
+<script src="/dropdowns/dropdown.js"></script>
+<%
+    loadInTableModular=function(columnName, permission){
+        var resultSet=data[columnName];
+        if(authType != 'principal' && authType != 'coordinator' && authType != 'hod' && authType != 'admin'){
+            authType = 'faculty';
+        }
+        for(var i = resultSet.length - 1; i >= 0; i--){
+            // console.log("from loadtablePartial " + authType + " " + permission[authType] + " " + GetParam);
+            if(typeof(GetParam) != 'undefined' && authType === 'faculty'){
+                __append('<tr>');
+            }
+            else if(permission[authType] === true){
+                __append('<tr data-toggle="modal" data-target="#myModalModular" onclick="fillDataModular(\''+columnName+'\','+i+')" onmouseover="hoverEffect(this)" onmouseout="removeHoverEffect(this)">');
+            }
+            else{
+                __append('<tr>');
+            }
+            for(var j in resultSet[i]){
+                if(typeof hiddenFields !== 'undefined'){
+                    // console.log("it reached hiddenFields  j = " + j);
+                    // console.log("it reached hiddenFields " + JSON.stringify(hiddenFields) + " " + hiddenFields[columnName][j] + " " + j);
+
+                    if(hiddenFields[columnName][j].view){
+                        continue;
+                    }
+                }
+                if(j==="slNo" || j==="facultyId")
+                   continue;
+
+
+                //  console.log(typeof(resultSet[i][j]) + " " + j + 'hello');
+                //  console.log(resultSet[i]);
+
+                __append('<td>');
+                if(resultSet[i][j]!=null){
+
+                    if(j.indexOf('date') != -1 || j.indexOf('Date') != -1){
+                        var dateString = new Date(Date.parse(resultSet[i][j]));
+                        // console.log("dateString " + typeof(dateString));
+                        __append(''+dateString.toDateString() +'');
+                    }
+                    else{
+                        __append(''+resultSet[i][j] +'');
+                    }
+                }
+                else
+                    __append("-");
+                __append('</td>');
+            }
+            // __append('<td><input class = "btn btn-primary" id = "' + tableName + 'Edit' + (i + 1) + '" style="margin:13px" value = "Edit" type = "button"></button></td>')
+
+        __append('</tr>');
+        }
+    }
+
+
+    loadInTable=function(resultSet){
+        for(var i = 0 ; i<resultSet.length;i++){
+            if((authType == "principal" || authType == "admin") && departmentId == "college"){
+                var path = resultSet[i].departmentId;
+                var address = "document.location.href =  '/department?departmentId="+path+"'";
+            } else{
+                var path =  resultSet[i].Fid;
+                var address = "document.location.href =  '/faculty?fId="+path+"'";
+            }
+            //changed on 18 jan 19 as per the request of Seema ma'am
+            if(authType == "principal" || authType == "admin" || authType == "hod" || authType == "coordinator")
+            __append('<tr onclick="' + address + '" onmouseover="hoverEffect(this)" onmouseout="removeHoverEffect(this)">');
+            for(var j in resultSet[i]){
+                if(j=="Fid"){
+                    continue;
+                }
+                __append('<td>');
+                if(resultSet[i][j]!=null)
+                    __append(''+resultSet[i][j] +'');
+                else
+                    __append("-");
+                __append('</td>');
+            }
+        __append('</tr>');
+        }
+    }
+
+    loadInTableVerticle=function(resultSet, tableNumber){
+        for(var i = 0 ; i<resultSet.length;i++){
+            for(var j in resultSet[i]){
+                if(j === 'about')continue;
+                __append('<tr onmouseover="hoverEffect(this)" onmouseout="removeHoverEffect(this)">');
+                __append('<th>');
+                if(j!=null){
+                    var k = '';
+                    k=k+j[0].toUpperCase();
+
+                    for(var n=1; n < j.length; n++){
+                        if(j[n] === j[n].toUpperCase())
+                            k=k+' '+j[n];
+                        else
+                            k=k+j[n];
+                    }
+                    if(j === 'dob')
+                        k = 'Date of Birth'
+                    __append(''+k +'');
+                }
+                else
+                    __append("-");
+                __append('</th>');
+                __append('<td>');
+                if(resultSet[i][j]!=null){
+                    if(j.indexOf('dob') != -1){
+                        var dateString = new Date(Date.parse(resultSet[i][j]));
+                        // console.log("dateString " + typeof(dateString));
+                        __append(''+dateString.toDateString() +'');
+                    }
+                    else{
+                        __append(''+resultSet[i][j] +'');
+                    }
+                }
+
+                else
+                    __append("-");
+                __append('</td>');
+                __append('</tr>');
+            }
+        }
+    }
+
+%>
+
+<div class="modal fade" id="myModalModular" role="dialog">
+<div class="modal-dialog">
+
+  <!-- Modal content-->
+  <div class="modal-content">
+  <div class="card">
+      <div class="card-header" data-background-color="purple" style="margin-top:-50px;">
+          <h4 class="title">Edit Row Data</h4>
+      </div>
+      <div class="card-content" id="modalCardContent">
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="modal fade" id="myModalInsert" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+      <div class="card">
+          <div class="card-header" data-background-color="purple" style="margin-top:-50px;">
+              <h4 class="title">Insert Row Data</h4>
+          </div>
+          <div class="card-content" id="modalCardContentInsert">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+<script>
+    var data={};
+    var index={};
+    var additional_data = {};
+    <% if(locals.data){%>
+    data = <%- JSON.stringify(data) %>
+    <%}%>
+    console.log(data);
+    <% if(locals.index){%>
+    index = <%- JSON.stringify(index) %>
+    <%}%>
+
+    <% if(locals.additional_data){%>
+    additional_data = <%- JSON.stringify(additional_data) %>
+    <%}%>
+
+    var hiddenFields = {};
+    <% if(locals.hiddenFields){%>
+    hiddenFields = <%- JSON.stringify(hiddenFields) %>
+    <%}%>
+</script>
+
+
+
+<script>
+    function hoverEffect(event){
+        event.style.background = "#EEEEEE";
+    }
+    function removeHoverEffect(event){
+        event.style.background = "white";
+    }
+    function fillDataModular(columnName, i){
+        // console.log("debug data-?",columnName, i)
+        var cardCont=$("#modalCardContent");
+        var str="";
+
+        str = str + ("<form method='POST' action='/v1/apis/apiUpdate/"+columnName+"'>");
+        //cardCont.append("<form method='POST' action='/v1/apis/apiUpdate/"+columnName+"'>")
+        str = str + ("<input name='url' type='hidden' value='"+index["url"]+"'>");
+        str = str + ("<input name='getParam' type='hidden' value='<%=GetParam%>'>");
+        var res = data[columnName][i];
+        // console.log(JSON.stringify(Object.keys(index[columnName])));
+        // console.log(JSON.stringify(Object.keys(res)));
+
+        // console.log(columnName);
+        for(var j in res){
+            // console.log("index[columnNAme][j] = " + columnName + " " + j + " " + index[columnName][j]);
+
+            if(hiddenFields[columnName][j].update){
+                str = str + ("<input name='"+j+"' type='hidden' value='"+res[j]+"'>");
+                continue;
+            }
+            if(index[columnName][j]){
+                var temp = index[columnName][j]
+            }
+            else{
+                var temp = "Undefined";
+            }
+            //if we have a date to display use a date widget/ selector
+            // console.log('column name: '+j)
+            if(additional_data[j]){
+                optionsList = '';
+                for(var ind_add = 0 ; ind_add < additional_data[j].length; ind_add++){
+                    var item = additional_data[j][ind_add];
+                    optionsList += '<option value = "' + item[j] + '">' + item[j] + '</option>';
+                    // console.log(item[j] + " is entry");
+                }
+                // console.log("additional data is " + additional_data[columnName]);
+                      str = str + ('<label for="inputState">' + j + '</label>\
+                <input list="' + j + '" name="' + j + '" id="inputState" class="form-control" />\
+                <datalist id="' + j + '">\
+                ' + optionsList + '</datalist>')
+            }
+            else if(j.indexOf('date') != -1 || j.indexOf('Date') != -1 || j === 'dob'){
+                var mDate = new Date(Date.parse(res[j]));
+
+                // console.log("fillDAtaModular res[j]" + mDate.getMonth());
+                var dateString = mDate.getFullYear() + "-";
+                var mm = mDate.getMonth() + 1;
+                if(mm < 10){
+                    dateString += '0' + mm;
+                }
+                else {
+                    dateString += mm;
+                }
+                dateString += "-";
+                if(mDate.getDate() < 10){
+                    dateString += '0' + mDate.getDate();
+                }
+                else{
+                    dateString += mDate.getDate();
+                }
+                // console.log("dateSTring " + dateString);
+                str = str + ('<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>\
+                <input name="'+j+'" type="date" class="form-control" value="'+dateString+'">\
+                </div>')
+            }
+
+            else if(dropdowns["fixed_" + columnName + "_" + j]){
+                var optionsList = ""
+                var op = dropdowns["fixed_" + columnName + "_" + j];
+                for(var z = 0; z< op.length ; z++){
+                  if(op[z] == res[j])
+                  {
+                    optionsList += '<option value = "' + op[z] + '" selected>' + op[z] + '</option>';
+                  }
+                  else
+                  {
+                    optionsList += '<option value = "' + op[z] + '">' + op[z] + '</option>';
+                  }
+                }
+                str = str + '<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>'
+                str = str + '<select name="' + j + '" id="inputState" class="form-control">\
+                ' + optionsList + '</select></div>'
+                  }
+
+            else if(dropdowns[columnName +"_"+ j]){
+                var optionsList = ""
+                var op = dropdowns[columnName +"_"+ j];
+                for(var z = 0; z< op.length ; z++){
+                    optionsList += '<option value = "' + op[z] + '">' + op[z] + '</option>';
+                }
+                str = str + '<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>'
+                str = str + '<input list="' + j + '" name="' + j + '" id="inputState" class="form-control" value="'+res[j]+'" />\
+                <datalist id="' + j + '">\
+                ' + optionsList + '</datalist></div>'
+            }
+            else{
+                str = str + ('<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>\
+                <input name="'+j+'" type="text" class="form-control" value="'+res[j]+'">\
+                </div>')
+            }
+        }
+        str = str + '<button type="submit" class="btn btn-primary pull-right">Update</button>\
+            <button type="reset" class="btn btn-warning pull-right" data-dismiss="modal">Cancel</button>'
+            if(columnName == 'faculty'){
+                str += '</form>'
+            }
+            else{
+                str += '<button type="submit" formaction="/v1/apis/apiDelete/'+columnName+'" class="btn btn-danger pull-right">Delete</button>\
+                </form>'
+            }
+            cardCont.html(str);
+    }
+
+    function fillDataModularInsert(columnName){
+    //   console.log("Insert model poped up");
+        var cardCont=$("#modalCardContent");
+        var str="";
+        str = str + ("<form method='POST' action='/v1/apis/apiInsert/"+columnName+"'>");
+        //cardCont.append("<form method='POST' action='/v1/apis/apiUpdate/"+columnName+"'>")
+        str = str + ("<input name='url' type='hidden' value='"+index["url"]+"'>");
+        str = str + ("<input name='getParam' type='hidden' value='<%=GetParam%>'>");
+
+        // console.log(JSON.stringify(Object.keys(index[columnName])));
+
+        // console.log(columnName);
+        // console.log(JSON.stringify(additional_data) + " " + columnName + " ");
+
+        // console.log(JSON.stringify(hiddenFields) + " " + columnName + " ");
+
+        for(var j in index[columnName]){
+            if(hiddenFields[columnName][j].insert){
+                str = str + ("<input name='"+j+"' type='hidden' value='null'>");
+                continue;
+            }
+            if(index[columnName])
+                var temp = index[columnName][j]
+            else
+                var temp = "Undefined";
+
+            if(additional_data[j]){
+                optionsList = '';
+                for(var ind_add = 0 ; ind_add < additional_data[j].length; ind_add++){
+                    var item = additional_data[j][ind_add];
+                    optionsList += '<option value = "' + item[j] + '">' + item[j] + '</option>';
+                    // console.log(item[j] + " is entry");
+                }
+                // console.log("additional data is " + additional_data[columnName]);
+                str = str + ('<label for="inputState">' + j + '</label>\
+                <input list="' + j + '" name="' + j + '" id="inputState" class="form-control" />\
+                <datalist id="' + j + '">\
+                ' + optionsList + '</datalist>')
+            }
+            else if(j.indexOf('date') != -1 || j.indexOf('Date') != -1){
+                str = str + ('<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>\
+                <input name="'+j+'" type="date" class="form-control" ">\
+                </div>')
+            }
+            else if(dropdowns["fixed_" + columnName + "_" + j]){
+                var optionsList = ""
+                var op = dropdowns["fixed_" + columnName +"_"+ j];
+                for(var z = 0; z< op.length ; z++){
+                    optionsList += '<option value = "' + op[z] + '">' + op[z] + '</option>';
+                }
+                str = str + '<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>'
+                str = str + '<select name="' + j + '" id="inputState" class="form-control">\
+                ' + optionsList + '</select></div>'
+            }
+            else if(dropdowns[columnName +"_"+ j]){
+                var optionsList = ""
+                var op = dropdowns[columnName +"_"+ j];
+                for(var z = 0; z< op.length ; z++){
+                    optionsList += '<option value = "' + op[z] + '">' + op[z] + '</option>';
+                }
+                str = str + '<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>'
+                str = str + '<input list="' + j + '" name="' + j + '" id="inputState" class="form-control" />\
+                <datalist id="' + j + '">\
+                ' + optionsList + '</datalist></div>'
+            }
+            else{
+                str = str + ('<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>\
+                <input name="'+j+'" type="text" class="form-control" ">\
+                </div>')
+            }
+        }
+        str = str + ('<button type="submit" class="btn btn-primary pull-right">Insert</button>\
+            <button type="reset" class="btn btn-warning pull-right" data-dismiss="modal">Cancel</button>\
+            </form>')
+        cardCont.html(str);
+    }
+
+    function fillDescriptionModular(columnName, i){
+        var cardCont=$("#modalCardContent");
+        var str="";
+        str = str + ("<form method='POST' action='/v1/apis/apiUpdate/"+columnName+"'>");
+        //cardCont.append("<form method='POST' action='/v1/apis/apiUpdate/"+columnName+"'>")
+        str = str + ("<input name='url' type='hidden' value='"+index["url"]+"'>");
+        if(typeof GetParam != 'undefined')
+            str = str + ("<input name='getParam' type='hidden' value='"+GetParam+"'>");
+        var res = data[columnName][i];
+        // console.log(JSON.stringify(Object.keys(index[columnName])));
+        // console.log(JSON.stringify(Object.keys(res)));
+
+        // console.log(columnName);
+        for(var j in res){
+            if(j=="slNo" || j=="facultyId"){
+                str = str + ("<input name='"+j+"' type='hidden' value='"+res[j]+"'>");
+                continue;
+            }
+            if(j != 'about')continue;
+
+            if(index[columnName])
+                var temp = index[columnName][j]
+            else
+                var temp = "Undefined";
+            str = str + ('<div class="form-group ">\
+                <label class="control-label">'+temp+'</label>\
+                <input name="'+j+'" type="text" class="form-control" value="'+res[j]+'">\
+                </div>')
+        }
+        str = str + ('<button type="submit" class="btn btn-primary pull-right">Update</button>\
+            <button type="reset" class="btn btn-warning pull-right" data-dismiss="modal">Cancel</button>\
+            </form>')
+        cardCont.html(str);
+    }
+
+
+    function fillData(resultSet,tableNumber){
+        var rowData = resultSet.cells;
+        // console.log(rowData[1].innerHTML);
+        var noOfEntries = rowData.length;
+            for(var i = 0;i<noOfEntries - 1;i++){
+                // console.log('data'+tableNumber + i);
+                document.getElementById('data'+ tableNumber + i).value = rowData[i].innerHTML;
+            }
+        //add("Update", tableNumber)
+    }
+
+    function fillDataVerticleTable(tableNumber){
+        <%if(data["faculty"]){%>
+            var resultSet = <%- JSON.stringify(data["faculty"])%>;
+        <%}%>
+
+        // console.log(resultSet);
+        var len = resultSet.length;
+        noOfEntries =  Object.keys(resultSet[0]).length;
+        var i=1;
+        for(var k=0;k<len;k++){
+            for(var j in resultSet[k]){
+                document.getElementById('data'+tableNumber + i).value = resultSet[k][j];
+                // console.log(resultSet[k][j]);
+                i++;
+            }
+        }
+    }
+
+    function displayInput(){
+        document.getElementById("profileImageButton").style.display = "inline";
+        document.getElementById("profileImageButton").style.zIndex = "999";
+    }
+    function hideInput(){
+        document.getElementById("profileImageButton").style.display = "none";
+    }
+    function checkIfInput(){
+        if(document.getElementById("profileImageButton").value == null){
+            // console.log("null");
+        } else{
+            // console.log("yeas");
+            document.getElementById("profileForm").submit();
+        }
+    }
+</script>

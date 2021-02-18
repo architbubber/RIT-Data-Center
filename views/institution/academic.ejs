@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+<% include ../partials/institution-sidebar %>
+<% include ../partials/institution-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Academic Committee</h4>
+                        <p class="category">information about duration, designation etc.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Category</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Status</th>
+                            </thead>
+                            <tbody>
+                                <% loadInTableModular("academic_council", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary pull-right insertButton" style="margin:13px" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick = "fillDataModularInsert('academic_council')">Insert</button>
+                    <a href = "/institution/academic/generateexcel/academic_council">
+                        <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

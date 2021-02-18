@@ -1,0 +1,120 @@
+<% include ../partials/header %>
+<% include ../partials/faculty-sidebar %>
+<% include ../partials/faculty-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+              <h2>R&D Details</h2>
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Funded Projects</h4>
+                        <p class="category">information about projects funded.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Role</th>
+                                <th>Project Title</th>
+                                <th>Funding Agency</th>
+                                <th>Scheme</th>
+                                <th>Sanctioned Order Number</th>
+                                <th>Project Duration</th>
+                                <th>Sanctioned Date</th>
+                                <th>Sanctioned Amount (in Rs.)</th>
+                                <th>Status</th>
+                            </thead>
+                            <tbody>
+                                <% loadInTableModular("funded_projects", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/faculty/generateexcel/1/6/?faculty=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left hodDisable" style="margin:13px">Generate Excel file</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" onclick = "fillDataModularInsert('funded_projects')" style="margin:13px">Insert</button>
+                </div>
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Patents</h4>
+                        <p class="category">Patents applied for and granted.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Title</th>
+                                <th>Inventors</th>
+                                <th>Date of Filing Application</th>
+                                <th>Date of Publication</th>
+                                <th>Date Granted</th>
+                                <th>Patent Type</th>
+                            </thead>
+                            <tbody>
+                                <% loadInTableModular("faculty_patent", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/faculty/generateexcel/2/6/?faculty=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left hodDisable" style="margin:13px">Generate Excel file</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" onclick = "fillDataModularInsert('faculty_patent')" style="margin:13px">Insert</button>
+                </div><div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Consultancy Details</h4>
+                        <p class="category">Consultancy for projects with organizations.</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                              <th>Role</th>
+                              <th>Project Title</th>
+                              <th>Type of Consultancy</th>
+                              <th>Organization</th>
+                              <th>Duration</th>
+                              <th>Sanctioned Date</th>
+                              <th>Amount received ( in Rs )</th>
+                            </thead>
+                            <tbody>
+                                <% loadInTableModular("consultancy", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/faculty/generateexcel/3/6/?faculty=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left hodDisable" style="margin:13px">Generate Excel file</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" onclick = "fillDataModularInsert('consultancy')" style="margin:13px">Insert</button>
+                </div>
+               <!-- <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Industrial Collaborations MOU</h4>
+                        <p class="category">information about MOUs signed with industries</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                              <th>Title of MOU</th>
+                              <th>MOU signed with (Industry/Govt)</th>
+                              <th>MOU Type</th>
+                              <th>National / International</th>
+                              <th>Signing Date</th>
+                              <th>Valid Till</th>
+                            </thead>
+                            <tbody>
+                                <% loadInTableModular("industrial_collaboration_mou", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/faculty/generateexcel/4/6/?faculty=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left hodDisable" style="margin:13px">Generate Excel file</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" onclick = "fillDataModularInsert('industrial_collaboration_mou')" style="margin:13px">Insert</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

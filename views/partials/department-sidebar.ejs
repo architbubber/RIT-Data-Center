@@ -1,0 +1,108 @@
+<div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg" style="z-index:4">
+
+<div class="logo" style=" background-color:#9C27B0">
+    <img src="/assets/img/brand.png" style="height:70px;" class="img-responsive">
+    </img>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li
+        <% if(type=="index"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/department?departmentId=<%=departmentId%>">
+                <i class="material-icons">dashboard</i>
+                <p>General Information</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="student-info"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/department/student-info?departmentId=<%=departmentId%>">
+                <i class="material-icons">person</i>
+                <p>Student Information</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="infrastructure-details"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/department/infrastructure-details?departmentId=<%=departmentId%>">
+                <i class="material-icons">content_paste</i>
+                <p>Infrastructure Details</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="admission-details"){%>
+        class="active"
+        <% } %>
+        >            <a href="/department/admission-details?departmentId=<%=departmentId%>">
+                <i class="material-icons">library_books</i>
+                <p>Admission Details</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="activities"){%>
+        class="active"
+        <% } %>
+        >            <a href="/department/activities?departmentId=<%=departmentId%>">
+                <i class="material-icons">bubble_chart</i>
+                <p>Activities</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="bosboe"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/department/bosboe?departmentId=<%=departmentId%>">
+                <i class="material-icons">location_on</i>
+                <p>BOS | BOE</p>
+            </a>
+        </li>
+        <!-- <li
+        <% if(type=="department-reports"){%>
+        class="active"
+        <% } %>
+        >            <a href="/department/department-reports?departmentId=<%=departmentId%>">
+                <i class="material-icons">bubble_chart</i>
+                <p>Reports</p>
+            </a>
+        </li> -->
+        <li
+        <% if(type=="add-faculty"){%>
+        class="active"
+        <% } %>
+        >            <a href="/department/add-faculty?departmentId=<%=departmentId%>">
+                <i class="material-icons">person</i>
+                <p>Add Faculty</p>
+            </a>
+        </li>
+        <li
+        <% if(type=="research"){%>
+        class="active"
+        <% } %>
+        >
+            <a href="/department/r&d?departmentId=<%=departmentId%>">
+                <i class="material-icons">dashboard</i>
+                <p>Research</p>
+            </a>
+        </li>
+        <li class="active-pro" style="margin-bottom:7%; text-transform: uppercase;">
+            <a style="background-color:#9C27B0; color:white;">
+                <i class="material-icons" style="color:white">person</i>
+                <p>
+                    <% if(authType!="hod" && authType!="coordinator" && authType!="principal" && authType!="admin"){%>
+                    Faculty
+                    <%}else{%>
+                    <%=authType%>
+                    <%}%>
+                </p>
+            </a>
+        </li>
+    </ul>
+</div>

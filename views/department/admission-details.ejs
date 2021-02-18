@@ -1,0 +1,56 @@
+<% include ../partials/header %>
+<% include ../partials/department-sidebar %>
+<% include ../partials/department-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">Admission Details</h4>
+                        <p class="category">information regarding admissions</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                          <thead class="text-primary">
+                            <tr>
+                                <th rowspan="3">Year</th>
+                                <th rowspan="3">No of UG students admitted</th>
+                                <th rowspan="3">No of PG students admitted</th>
+                                <th rowspan="3">No of PG students with GATE score</th>
+                                <th colspan="2" style="text-align: center">UG cutoff rank</th>
+                                <th colspan="2" style="text-align: center">PG cutoff rank</th>
+                                <th rowspan="3">Admitted Through Lateral Entry</th>
+                                <th colspan="2" style="text-align: center">Research Scholars</th>
+                            </tr>
+                            <tr>
+                              <th rowspan="2">CET</th>
+                              <th rowspan="2">COMEDK</th>
+                              <th rowspan="2">CET</th>
+                              <th rowspan="2">COMEDK</th>
+                              <th colspan="2" style="text-align: center">PhD</th>
+                              <th rowspan="2">MSc by research</th>
+                            </tr>
+                            <tr>
+                              <th>Full Time</th>
+                              <th>Part Time</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                              <% loadInTableModular('admissions', updatePermission) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/department/generateexcel/1/4/?departmentId=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+                <button class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('admissions')">Insert</button>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

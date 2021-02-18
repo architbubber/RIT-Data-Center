@@ -1,0 +1,41 @@
+<% include ../partials/header %>
+<% include ../partials/department-sidebar %>
+<% include ../partials/department-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="purple">
+                    <h4 class="title"><%-departmentId%> General Information</h4>
+                    <p class="category">General Faculty Information</p>
+                </div>
+                <div class="card-content table-responsive">
+                    <table class="table" >
+                        <thead class="text-primary">
+                            <th>Faculty Name</th>
+                            <th>Gender</th>
+                            <th>Designation</th>
+                            <th>Nature Of Appointment</th>
+                            <th>Contact Number</th>
+                            <th>EmailId</th>
+                        </thead>
+                        <tbody>
+                        <%loadInTable(data.departmentGeneralInfo)%>
+                        </tbody>
+                    </table>
+                </div>
+                    <a href = "department/generateexcel/1/1/?departmentId=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+            <!--    <button class="btn btn-primary pull-right  insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModular('departmentGeneralInfo', 0)">Update</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>

@@ -1,0 +1,6 @@
+#Starting the process in the background
+nohup <process_name> #example nohup nodemon
+
+#stopping the process running at a particular port
+fuser -k <port_number>/tcp #example fuser -k 3000/tcp
+

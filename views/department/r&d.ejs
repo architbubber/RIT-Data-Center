@@ -1,0 +1,73 @@
+<% include ../partials/header %>
+<% include ../partials/department-sidebar %>
+<% include ../partials/department-navbar %>
+<% include ../partials/loadTablePartial %>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+              <h2>Research and Development</h2>
+                <div class="card">
+                    <div class="card-header" data-background-color="purple">
+                        <h4 class="title">PhD/Msc(Res) in other universities</h4>
+                        <p class="category">Internal candidates registered for PhD/Msc(Res) in other universities</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>Name of the Research Scholar</th>
+                                <th>USN</th>
+                                <th>Title</th>
+                                <th>Research Supervisor</th>
+                                <th>University or R&D Center</th>
+                                <th>Registration Year</th>
+                                <th>Status of completion</th>
+                            </thead>
+                            <tbody>
+                                <%loadInTableModular("research_other", updatePermission)%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href = "/department/generateexcel/1/7/?departmentId=<%-GetParam%>">
+                    <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                    </a>
+                <button class="btn btn-primary pull-right insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('research_other')">Insert</button>
+              </div>
+
+              <div class="card">
+                  <div class="card-header" data-background-color="purple">
+                      <h4 class="title">RIT research center</h4>
+                      <p class="category">Candidates registered in RIT(department) research center</p>
+                  </div>
+                  <div class="card-content table-responsive">
+                      <table class="table">
+                          <thead class="text-primary">
+                              <th>Name of the Research Scholar</th>
+                              <th>USN</th>
+                              <th>Title</th>
+                              <th>Research Supervisor</th>
+                              <th>Program</th>
+                              <th>Affiliation of Research Scholar</th>
+                              <th>Registration Year</th>
+                              <th>Status of Completion</th>
+                          </thead>
+                          <tbody>
+                              <%loadInTableModular("research_rit", updatePermission)%>
+                          </tbody>
+                      </table>
+                  </div>
+                  <a href = "/department/generateexcel/2/7/?departmentId=<%-GetParam%>">
+                  <button class="btn btn-primary pull-left" style="margin:13px">Generate Excel file</button>
+                  </a>
+              <button class="btn btn-primary pull-right insertButton" data-toggle="modal" data-target="#myModalModular" style="margin:13px" onclick="fillDataModularInsert('research_rit')">Insert</button>
+            </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/disable-buttons %>
+<% include ../partials/footer %>
